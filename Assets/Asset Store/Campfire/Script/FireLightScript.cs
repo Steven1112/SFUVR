@@ -9,8 +9,14 @@ public class FireLightScript : MonoBehaviour
 	private float flickering = 0.0f;
 
 	public Light fireLight;
+	public ParticleSystem[] particles;
 
 	float random;
+
+	void Start()
+	{
+		TurnOn (false);
+	}
 
 	void FixedUpdate()
 	{
@@ -23,4 +29,14 @@ public class FireLightScript : MonoBehaviour
 		}
 		flickering += Time.deltaTime;
 	}
+
+	public void TurnOn(bool b)
+	{
+		fireLight.enabled = b;
+		foreach(ParticleSystem p in particles)
+		{
+			p.gameObject.SetActive (b);
+		}
+	}
+
 }
