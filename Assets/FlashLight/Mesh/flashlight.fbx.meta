@@ -1,0 +1,196 @@
+fileFormatVersion: 2
+guid: dba8332bfef8340b5b82eaecdbfacc81
+timeCreated: 1496944240
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: button002
+    100002: //RootNode
+    100004: flashlight:bulb_base001
+    100006: flashlight:button001
+    100008: flashlight:glass001
+    100010: flashlight:mirrior001
+    100012: flashlight:Object003
+    100014: flashlight:Object004
+    100016: flashlight:Object005
+    100018: flashlight_high
+    100020: flashlight_low
+    100022: glass001
+    100024: Object005
+    100026: Object006
+    100028: polySurface11
+    100030: polySurface13
+    100032: polySurface15
+    100034: polySurface16
+    100036: polySurface17
+    100038: polySurface5
+    100040: polySurface6
+    100042: polySurface7
+    100044: polySurface8
+    100046: flashlight_high_LOD0
+    100048: flashlight_low_LOD1
+    400000: button002
+    400002: //RootNode
+    400004: flashlight:bulb_base001
+    400006: flashlight:button001
+    400008: flashlight:glass001
+    400010: flashlight:mirrior001
+    400012: flashlight:Object003
+    400014: flashlight:Object004
+    400016: flashlight:Object005
+    400018: flashlight_high
+    400020: flashlight_low
+    400022: glass001
+    400024: Object005
+    400026: Object006
+    400028: polySurface11
+    400030: polySurface13
+    400032: polySurface15
+    400034: polySurface16
+    400036: polySurface17
+    400038: polySurface5
+    400040: polySurface6
+    400042: polySurface7
+    400044: polySurface8
+    400046: flashlight_high_LOD0
+    400048: flashlight_low_LOD1
+    2300000: button002
+    2300002: flashlight:bulb_base001
+    2300004: flashlight:button001
+    2300006: flashlight:glass001
+    2300008: flashlight:mirrior001
+    2300010: flashlight:Object003
+    2300012: flashlight:Object004
+    2300014: flashlight:Object005
+    2300016: glass001
+    2300018: Object005
+    2300020: Object006
+    2300022: polySurface11
+    2300024: polySurface13
+    2300026: polySurface15
+    2300028: polySurface16
+    2300030: polySurface17
+    2300032: polySurface5
+    2300034: polySurface6
+    2300036: polySurface7
+    2300038: polySurface8
+    2300040: flashlight_high_LOD0
+    2300042: flashlight_low_LOD1
+    3300000: button002
+    3300002: flashlight:bulb_base001
+    3300004: flashlight:button001
+    3300006: flashlight:glass001
+    3300008: flashlight:mirrior001
+    3300010: flashlight:Object003
+    3300012: flashlight:Object004
+    3300014: flashlight:Object005
+    3300016: glass001
+    3300018: Object005
+    3300020: Object006
+    3300022: polySurface11
+    3300024: polySurface13
+    3300026: polySurface15
+    3300028: polySurface16
+    3300030: polySurface17
+    3300032: polySurface5
+    3300034: polySurface6
+    3300036: polySurface7
+    3300038: polySurface8
+    3300040: flashlight_high_LOD0
+    3300042: flashlight_low_LOD1
+    4300000: polySurface5
+    4300002: polySurface6
+    4300004: polySurface7
+    4300006: polySurface8
+    4300008: flashlight:Object004
+    4300010: flashlight:Object003
+    4300012: flashlight:glass001
+    4300014: flashlight:button001
+    4300016: flashlight:bulb_base001
+    4300018: flashlight:mirrior001
+    4300020: polySurface17
+    4300022: polySurface16
+    4300024: polySurface15
+    4300026: polySurface13
+    4300028: polySurface11
+    4300030: Object006
+    4300032: Object005
+    4300034: button002
+    4300036: glass001
+    4300038: flashlight:Object005
+    4300040: flashlight_high_LOD0
+    4300042: flashlight_low_LOD1
+    20500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages:
+    - 0.25
+    - 0.01
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
