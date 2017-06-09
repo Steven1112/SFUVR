@@ -2,6 +2,8 @@
 
 public class FireIgniter : MonoBehaviour {
 
+	[SerializeField] private string objectTag;
+
 	private FireLightScript fireLight;
 
 	private void Awake()
@@ -11,22 +13,28 @@ public class FireIgniter : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if(other.tag == "FireRock")
+		if(other.tag == objectTag)
 		{
 			CollisionCounter cc = other.GetComponent<CollisionCounter> ();
-			cc.IsInsideArea = true;
-			cc.OnReachCountTarget += IgniteFire;
+			if(cc)
+			{
+				cc.IsInsideArea = true;
+				cc.OnReachCountTarget += IgniteFire;
+			}
 		}
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
-		if(other.tag == "FireRock")
+		if(other.tag == objectTag)
 		{
 			CollisionCounter cc = other.GetComponent<CollisionCounter> ();
-			cc.IsInsideArea = false;
-			cc.ResetCounter ();
-			cc.OnReachCountTarget -= IgniteFire;
+			if (cc) 
+			{
+				cc.IsInsideArea = false;
+				cc.ResetCounter ();
+				cc.OnReachCountTarget -= IgniteFire;
+			}
 		}
 	}
 

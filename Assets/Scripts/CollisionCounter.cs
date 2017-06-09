@@ -3,7 +3,6 @@ using System;
 
 public class CollisionCounter : MonoBehaviour 
 {
-	[SerializeField] private string objectTag;
 	[SerializeField] private int countTarget;
 
 	private event Action onReachCountTarget;
@@ -24,13 +23,16 @@ public class CollisionCounter : MonoBehaviour
 		//Check if rock is inside campfire area
 		if(isInsideArea)
 		{
-			if(other.tag == objectTag)
+			if(other.tag == this.tag)
 			{
 				counter++;
 				if(counter == countTarget)
 				{
 					//Ignite campfire
-					onReachCountTarget.Invoke();
+					if(onReachCountTarget != null)
+					{
+						onReachCountTarget.Invoke();
+					}
 				}
 			}
 		}
