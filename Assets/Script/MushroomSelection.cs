@@ -41,6 +41,14 @@ public class MushroomSelection : MonoBehaviour
             // trigger sound
             col.gameObject.SetActive(false);
             blurEffect.blur.enabled = true;
+            StartCoroutine(WaitToDie());
+        }
+
+        if (string.Equals(col.gameObject.tag, "poolArea"))
+        {
+            // get drunk into the pool and dead
+            Debug.Log("Getting into the pool!");
+            DeadInPool();
         }
     }
 
@@ -67,6 +75,29 @@ public class MushroomSelection : MonoBehaviour
             // trigger sound
             col.gameObject.SetActive(false);
             blurEffect.blur.enabled = true;
+            StartCoroutine(WaitToDie());
         }
+
+        if (string.Equals(col.gameObject.tag, "poolArea"))
+        {
+            // get drunk into the pool and dead
+            Debug.Log("Getting into the pool!");
+            DeadInPool();
+        }
+    }
+
+    // ate posioned mushroom getting blur for seconds to dead end
+    IEnumerator WaitToDie()
+    {
+        yield return new WaitForSeconds(3);
+        LevelManager.instance.clearBackground = true;
+        blurEffect.blur.enabled = false;
+        LevelManager.instance.posionedMushroomDeadUI.SetActive(true);
+    }
+
+    // trigger in pool dead end
+    public void DeadInPool()
+    {
+        LevelManager.instance.drunkInPoolDeadUI.SetActive(true);
     }
 }
