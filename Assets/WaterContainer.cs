@@ -23,7 +23,7 @@ public class WaterContainer: MonoBehaviour {
 		//When don't hold the cup in right rotation
 		//Debug.Log(Quaternion.Angle(Quaternion.identity,transform.rotation));
 		if(Quaternion.Angle(Quaternion.identity,transform.rotation)>=degreeToPoolWater){
-			Debug.Log ("EmptyCup");
+			//Debug.Log ("EmptyCup");
 			if (waterInCup.localScale.y>emptyCupScale) {
 				EmptyCup ();
 				//Debug.Log ("EmptyCup");
