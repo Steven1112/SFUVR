@@ -16,6 +16,7 @@ public class WaterContainer: MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		waterInCup = GameObject.Find("WaterInCup").transform;
+		waterInCup.gameObject.SetActive (false);
 		waterSoundEffects = GetComponents<AudioSource> ();
 	}
 
@@ -36,6 +37,7 @@ public class WaterContainer: MonoBehaviour {
 		if(coll.tag == "Waterfall"){
 			//Fill the Cup
 			if (waterInCup.localScale.y<fullCupScale) {
+				waterInCup.gameObject.SetActive (true);
 				FillCup ();
 			}
 			t = 0;
@@ -53,6 +55,7 @@ public class WaterContainer: MonoBehaviour {
 		
 		t += fillSpeed * Time.deltaTime;
 		waterInCup.localScale = new Vector3 (waterInCup.localScale.x, Mathf.Lerp (waterInCup.localScale.y, emptyCupScale, t), waterInCup.localScale.z);
+		waterInCup.gameObject.SetActive (false);
 		if (!waterSoundEffects [1].isPlaying) {
 			waterSoundEffects [1].Play();
 		} 
