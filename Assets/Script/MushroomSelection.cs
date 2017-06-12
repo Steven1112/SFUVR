@@ -8,6 +8,8 @@ public class MushroomSelection : MonoBehaviour
 {
     public BlurOptimized blurEffect;
     public int blurTime;
+    public AudioClip eatMushroomSound;
+    public AudioClip dizzyBlurSound;
 
     public void Start()
     {
@@ -26,6 +28,7 @@ public class MushroomSelection : MonoBehaviour
         {
             // trigger unicorn and dizzy effect
             // trigger sound
+            SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
             col.gameObject.SetActive(false);
         }
 
@@ -33,6 +36,7 @@ public class MushroomSelection : MonoBehaviour
         {
             // trigger rainbow effect
             // trigger sound
+            SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
             col.gameObject.SetActive(false);
         }
 
@@ -40,8 +44,10 @@ public class MushroomSelection : MonoBehaviour
         {
             // trigger posion effect
             // trigger sound
+            SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
             col.gameObject.SetActive(false);
             blurEffect.blur.enabled = true;
+            SoundManager.instance.playSingle("dizzyBlurSound", dizzyBlurSound);
             StartCoroutine(WaitToDie());
         }
 
@@ -58,8 +64,8 @@ public class MushroomSelection : MonoBehaviour
         Debug.Log("Tag name:" + col.gameObject.tag);
         if (string.Equals(col.gameObject.tag, "goodmushroom"))
         {
-            // trigger unicorn and dizzy effect
             // trigger sound
+            SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
             col.gameObject.SetActive(false);
         }
 
@@ -67,15 +73,18 @@ public class MushroomSelection : MonoBehaviour
         {
             // trigger rainbow effect
             // trigger sound
+            SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
             col.gameObject.SetActive(false);
         }
 
         if (string.Equals(col.gameObject.tag, "posionmushroom"))
         {
-            // trigger posion effect
+            // trigger dizzy blur effect
             // trigger sound
+            SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
             col.gameObject.SetActive(false);
             blurEffect.blur.enabled = true;
+            SoundManager.instance.playSingle("dizzyBlurSound", dizzyBlurSound);
             StartCoroutine(WaitToDie());
         }
 
@@ -94,6 +103,7 @@ public class MushroomSelection : MonoBehaviour
         LevelManager.instance.clearBackground = true;
         blurEffect.blur.enabled = false;
         LevelManager.instance.posionedMushroomDeadUI.SetActive(true);
+        SoundManager.instance.stopSingle("dizzyBlurSound", dizzyBlurSound);
     }
 
     // trigger in pool dead end
