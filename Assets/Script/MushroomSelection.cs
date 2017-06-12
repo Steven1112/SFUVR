@@ -7,6 +7,7 @@ using UnityStandardAssets.ImageEffects;
 public class MushroomSelection : MonoBehaviour
 {
     public BlurOptimized blurEffect;
+    public int blurTime;
 
     public void Start()
     {
@@ -89,7 +90,7 @@ public class MushroomSelection : MonoBehaviour
     // ate posioned mushroom getting blur for seconds to dead end
     IEnumerator WaitToDie()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(blurTime);
         LevelManager.instance.clearBackground = true;
         blurEffect.blur.enabled = false;
         LevelManager.instance.posionedMushroomDeadUI.SetActive(true);
@@ -99,5 +100,6 @@ public class MushroomSelection : MonoBehaviour
     public void DeadInPool()
     {
         LevelManager.instance.drunkInPoolDeadUI.SetActive(true);
+        LevelManager.instance.clearBackground = true;
     }
 }

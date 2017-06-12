@@ -9,7 +9,9 @@ public class LevelManager : MonoBehaviour {
     public bool drinkWater = false;
     public GameObject backgroundObjects;
     public GameObject posionedMushroomDeadUI;
+    public GameObject noWaterDeadUI;
     public GameObject drunkInPoolDeadUI;
+    public GameObject rescueUI;
 
     public static LevelManager instance = null;
 

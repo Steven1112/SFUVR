@@ -12,6 +12,7 @@ public class WaterContainer: MonoBehaviour {
 	float t  = 0;
 	const float emptyCupScale = 0.0001f;
 	const float fullCupScale = 1f;
+    public int waitDrinkTime;
 
 	// Use this for initialization
 	void Start () {
@@ -41,11 +42,17 @@ public class WaterContainer: MonoBehaviour {
 				FillCup ();
 			}
 			t = 0;
-		}else if(coll.tag == "Player"){
+
+           StartCoroutine(WaitToDrink());
+        }
+        else if(coll.tag == "Player"){
 			//Empty the Cup
 			if (waterInCup.localScale.y>emptyCupScale) {
 				EmptyCup ();
-			}
+                LevelManager.instance.drinkWater = true;
+                LevelManager.instance.rescueUI.SetActive(true);
+                LevelManager.instance.clearBackground = true;
+            }
 			t = 0;
 		}
 	}
@@ -71,4 +78,16 @@ public class WaterContainer: MonoBehaviour {
 			waterSoundEffects [0].Play();
 		} 
 	}
+
+    // wait for seconds to no drink water dead end
+    IEnumerator WaitToDrink()
+    {
+        yield return new WaitForSeconds(waitDrinkTime);
+
+        if (LevelManager.instance.drinkWater == false)
+        {
+            LevelManager.instance.clearBackground = true;
+            LevelManager.instance.noWaterDeadUI.SetActive(true);
+        }
+    }
 }
