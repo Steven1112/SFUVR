@@ -12,10 +12,12 @@ public class WaterContainer: MonoBehaviour {
 	float t  = 0;
 	const float emptyCupScale = 0.0001f;
 	const float fullCupScale = 1f;
+    public int waitDrinkTime;
 
 	// Use this for initialization
 	void Start () {
 		waterInCup = GameObject.Find("WaterInCup").transform;
+		//waterInCup.gameObject.SetActive (false);
 		waterSoundEffects = GetComponents<AudioSource> ();
 	}
 
@@ -36,14 +38,21 @@ public class WaterContainer: MonoBehaviour {
 		if(coll.tag == "Waterfall"){
 			//Fill the Cup
 			if (waterInCup.localScale.y<fullCupScale) {
+				//waterInCup.gameObject.SetActive (true);
 				FillCup ();
 			}
 			t = 0;
-		}else if(coll.tag == "Player"){
+
+           StartCoroutine(WaitToDrink());
+        }
+        else if(coll.tag == "Player"){
 			//Empty the Cup
 			if (waterInCup.localScale.y>emptyCupScale) {
 				EmptyCup ();
-			}
+                LevelManager.instance.drinkWater = true;
+                LevelManager.instance.rescueUI.SetActive(true);
+                LevelManager.instance.clearBackground = true;
+            }
 			t = 0;
 		}
 	}
@@ -53,6 +62,7 @@ public class WaterContainer: MonoBehaviour {
 		
 		t += fillSpeed * Time.deltaTime;
 		waterInCup.localScale = new Vector3 (waterInCup.localScale.x, Mathf.Lerp (waterInCup.localScale.y, emptyCupScale, t), waterInCup.localScale.z);
+		//waterInCup.gameObject.SetActive (false);
 		if (!waterSoundEffects [1].isPlaying) {
 			waterSoundEffects [1].Play();
 		} 
@@ -68,4 +78,16 @@ public class WaterContainer: MonoBehaviour {
 			waterSoundEffects [0].Play();
 		} 
 	}
+
+    // wait for seconds to no drink water dead end
+    IEnumerator WaitToDrink()
+    {
+        yield return new WaitForSeconds(waitDrinkTime);
+
+        if (LevelManager.instance.drinkWater == false)
+        {
+            LevelManager.instance.clearBackground = true;
+            LevelManager.instance.noWaterDeadUI.SetActive(true);
+        }
+    }
 }
