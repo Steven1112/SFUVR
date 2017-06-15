@@ -25,7 +25,7 @@ public class FlashlightController : MonoBehaviour {
 
 	private void OnObjectUngrabbed(object sender, InteractableObjectEventArgs e)
 	{
-		TurnOn (false);
+		//TurnOn (false);
 	}
 
 	private void TurnOn(bool b)
