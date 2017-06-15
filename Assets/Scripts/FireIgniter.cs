@@ -5,10 +5,12 @@ public class FireIgniter : MonoBehaviour {
 	[SerializeField] private string objectTag;
 
 	private FireLightScript fireLight;
+	private AudioSource audioSource;
 
 	private void Awake()
 	{
 		fireLight = transform.parent.GetComponent<FireLightScript> ();
+		audioSource = GetComponent<AudioSource> ();
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -41,6 +43,7 @@ public class FireIgniter : MonoBehaviour {
 	private void IgniteFire()
 	{
 		fireLight.TurnOn (true);
+		audioSource.Play ();
 	}
 
 }

@@ -5,12 +5,18 @@ public class CollisionCounter : MonoBehaviour
 {
 	[SerializeField] private int countTarget;
 
+	private AudioSource audioSource;
 	private event Action onReachCountTarget;
 	private int counter;
 	private bool isInsideArea;
 
 	public bool IsInsideArea { get { return isInsideArea; } set { isInsideArea = value; } }
 	public event Action OnReachCountTarget { add { onReachCountTarget += value; } remove { onReachCountTarget -= value; } }
+
+	private void Awake()
+	{
+		audioSource = GetComponent<AudioSource> ();
+	}
 
 	private void Start()
 	{
@@ -26,6 +32,8 @@ public class CollisionCounter : MonoBehaviour
 			if(other.tag == this.tag)
 			{
 				counter++;
+				audioSource.Play ();
+
 				if(counter == countTarget)
 				{
 					//Ignite campfire
