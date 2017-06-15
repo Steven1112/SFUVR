@@ -26,14 +26,14 @@ public class CollisionCounter : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		//Check if rock is inside campfire area
-		if(isInsideArea)
+		if(other.tag == this.tag)
 		{
-			if(other.tag == this.tag)
+			audioSource.Play ();
+
+			//Check if rock is inside campfire area
+			if(isInsideArea)
 			{
 				counter++;
-				audioSource.Play ();
-
 				if(counter == countTarget)
 				{
 					//Ignite campfire
