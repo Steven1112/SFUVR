@@ -1,33 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 public class WaterContainer: MonoBehaviour {
 
 	[Tooltip("the first child object should be the water to make sure the script work.")]
 	private Transform waterInCup;
 	private float fillSpeed = 2f;
-	private float degreeToPoolWater = 90f;
+	private float degreeToPoolWater = 180f;
 	private AudioSource[] waterSoundEffects;
 	float t  = 0;
 	const float emptyCupScale = 0.0001f;
 	const float fullCupScale = 1.5f;
 	private bool haveWater;
-	private bool waterBeenBoiled;
     public int waitDrinkTime;
 
-	// Use this for initialization
-	void Start () {
+    public BlurOptimized blurEffect;
+    public AudioClip dizzyBlurSound;
+    public int blurTime;
+
+    public static WaterContainer instance = null;
+
+    // Use this for initialization
+    void Start () {
 		waterInCup = GameObject.Find("WaterInCup").transform;
 		waterInCup.gameObject.SetActive (false);
 		waterSoundEffects = GetComponents<AudioSource> ();
 		haveWater = false;
-		waterBeenBoiled = false;
-	}
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
 	void Update(){
 		//When don't hold the cup in right rotation
 		//Debug.Log(Quaternion.Angle(Quaternion.identity,transform.rotation));
+
+
 		if(Quaternion.Angle(Quaternion.identity,transform.rotation)>=degreeToPoolWater){
 			//Debug.Log ("EmptyCup");
 			if (waterInCup.localScale.y>emptyCupScale) {
@@ -39,8 +55,33 @@ public class WaterContainer: MonoBehaviour {
 			}
 			t = 0;
 		}
-	}
-	void OnTriggerStay(Collider coll){
+
+    }
+
+    public void OnTriggerEnter(Collider col)
+    {
+        if (string.Equals(col.gameObject.tag, "Player"))
+        {
+            Debug.Log("Drink water");
+            if (LevelManager.instance.drinkWater == true && LevelManager.instance.unboiledWater == true)
+            {
+                //Timer.instance.displaySeconds = Timer.instance.displaySeconds - Timer.instance.unBoiledWaterPunishSeconds;
+                Timer.instance.displayMinutes -= 1;
+                Debug.Log("Punished seconds for drinking unboiled water");
+                blurEffect.blur.enabled = true;
+                SoundManager.instance.playSingle("dizzyBlurSound", dizzyBlurSound);
+                StartCoroutine(WaitToBlurRemove());
+            }
+
+            if (LevelManager.instance.drinkWater == true && LevelManager.instance.unboiledWater == false)
+            {
+                // drink boiled water
+            }
+        }
+
+    }
+
+    void OnTriggerStay(Collider coll){
 		//Debug.Log (coll.name);
 		if (coll.tag == "Waterfall") {
 			//Fill the Cup
@@ -50,21 +91,25 @@ public class WaterContainer: MonoBehaviour {
 			}
 			t = 0;
 
-			StartCoroutine (WaitToDrink ());
-		} else if (coll.tag == "Player") {
+            LevelManager.instance.unboiledWater = true;
+
+            //StartCoroutine(WaitToDrink());
+
+        } else if (coll.tag == "Player") {
 			//Empty the Cup
 			if (waterInCup.localScale.y > emptyCupScale) {
 				EmptyCup ();
 				waterInCup.gameObject.SetActive (false);
-				LevelManager.instance.drinkWater = true;
-				LevelManager.instance.rescueUI.SetActive (true);
-				LevelManager.instance.clearBackground = true;
+                LevelManager.instance.drinkWater = true;
 
-			}
+            }
 			t = 0;
 		} else if (coll.tag == "BoneFire") {
-			if(haveWater)
-			WaterBoiling ();
+            if (haveWater)
+            {
+                WaterBoiling();
+                LevelManager.instance.unboiledWater = false;
+            }
 		}
 	}
 
@@ -80,16 +125,15 @@ public class WaterContainer: MonoBehaviour {
 		if (!waterSoundEffects [1].isPlaying&&haveWater) {
 			waterSoundEffects [1].Play();
 			haveWater = false;
-			waterBeenBoiled = false;
 		} 
 		waterInCup.gameObject.SetActive (false);
 
 
 	}
 	void WaterBoiling(){
+        Debug.Log("water");
 		if (!waterSoundEffects [2].isPlaying) {
 			waterSoundEffects [2].Play();
-			waterBeenBoiled = true;
 		} 
 	}
 
@@ -108,10 +152,13 @@ public class WaterContainer: MonoBehaviour {
     {
         yield return new WaitForSeconds(waitDrinkTime);
 
-        if (LevelManager.instance.drinkWater == false)
-        {
-            LevelManager.instance.clearBackground = true;
-            LevelManager.instance.noWaterDeadUI.SetActive(true);
-        }
+        // do something
+    }
+
+    IEnumerator WaitToBlurRemove()
+    {
+        yield return new WaitForSeconds(blurTime);
+        blurEffect.blur.enabled = false;
+        SoundManager.instance.stopSingle("dizzyBlurSound", dizzyBlurSound);
     }
 }

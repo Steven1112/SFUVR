@@ -39,6 +39,7 @@ public class SoundManager : MonoBehaviour
             eatMushroomSound.clip = sound;
             eatMushroomSound.Play();
             eatMushroomSound.loop = false;
+            dizzyBlurSound.volume = 1;
             Debug.Log("is playing" + sound.name);
         }
 
@@ -46,6 +47,7 @@ public class SoundManager : MonoBehaviour
         {
             dizzyBlurSound.clip = sound;
             dizzyBlurSound.Play();
+            dizzyBlurSound.volume = 0.3f;
             Debug.Log("is playing" + sound.name);
         }
     }
@@ -58,6 +60,7 @@ public class SoundManager : MonoBehaviour
             eatMushroomSound.Stop();
             eatMushroomSound.loop = false;
             Debug.Log("is stopping" + sound.name);
+            dizzyBlurSound.volume = 1;
         }
 
         if (audioSource == "dizzyBlurSound")
@@ -65,6 +68,7 @@ public class SoundManager : MonoBehaviour
             dizzyBlurSound.clip = sound;
             dizzyBlurSound.Stop();
             Debug.Log("is stopping" + sound.name);
+            dizzyBlurSound.volume = 0.3f;
         }
     }
 }

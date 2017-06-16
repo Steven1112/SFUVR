@@ -51,18 +51,23 @@ public class MushroomSelection : MonoBehaviour
 
             LevelManager.instance.eatPosionedMushroom = true;
 
-            Timer.instance.displaySeconds = Timer.instance.displaySeconds - Timer.instance.posionedMushroomPunishSeconds;
+            //Timer.instance.displaySeconds = Timer.instance.displaySeconds - Timer.instance.posionedMushroomPunishSeconds;
+            Timer.instance.displayMinutes -= 1;
             Debug.Log("Punished seconds for eating posioned mushroom");
 
             StartCoroutine(WaitToBlurRemove());
         }
 
+
+        /*
         if (string.Equals(col.gameObject.tag, "poolArea"))
         {
             // get drunk into the pool and dead
             Debug.Log("Getting into the pool!");
             DeadInPool();
         }
+
+       */
     }
 
     public void OnCollisionEnter(Collision col)
@@ -100,12 +105,14 @@ public class MushroomSelection : MonoBehaviour
             StartCoroutine(WaitToBlurRemove());
         }
 
+        /*
         if (string.Equals(col.gameObject.tag, "poolArea"))
         {
             // get drunk into the pool and dead
             Debug.Log("Getting into the pool!");
             DeadInPool();
         }
+        */
     }
 
     // ate posioned mushroom getting blur for seconds to dead end
