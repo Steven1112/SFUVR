@@ -48,7 +48,13 @@ public class MushroomSelection : MonoBehaviour
             col.gameObject.SetActive(false);
             blurEffect.blur.enabled = true;
             SoundManager.instance.playSingle("dizzyBlurSound", dizzyBlurSound);
-            StartCoroutine(WaitToDie());
+
+            LevelManager.instance.eatPosionedMushroom = true;
+
+            Timer.instance.displaySeconds = Timer.instance.displaySeconds - Timer.instance.posionedMushroomPunishSeconds;
+            Debug.Log("Punished seconds for eating posioned mushroom");
+
+            StartCoroutine(WaitToBlurRemove());
         }
 
         if (string.Equals(col.gameObject.tag, "poolArea"))
@@ -79,13 +85,19 @@ public class MushroomSelection : MonoBehaviour
 
         if (string.Equals(col.gameObject.tag, "posionmushroom"))
         {
-            // trigger dizzy blur effect
+            // trigger posion effect
             // trigger sound
             SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
             col.gameObject.SetActive(false);
             blurEffect.blur.enabled = true;
             SoundManager.instance.playSingle("dizzyBlurSound", dizzyBlurSound);
-            StartCoroutine(WaitToDie());
+
+            LevelManager.instance.eatPosionedMushroom = true;
+
+            Timer.instance.displaySeconds = Timer.instance.displaySeconds - Timer.instance.posionedMushroomPunishSeconds;
+            Debug.Log("Punished seconds for eating posioned mushroom");
+
+            StartCoroutine(WaitToBlurRemove());
         }
 
         if (string.Equals(col.gameObject.tag, "poolArea"))
@@ -97,12 +109,10 @@ public class MushroomSelection : MonoBehaviour
     }
 
     // ate posioned mushroom getting blur for seconds to dead end
-    IEnumerator WaitToDie()
+    IEnumerator WaitToBlurRemove()
     {
         yield return new WaitForSeconds(blurTime);
-        LevelManager.instance.clearBackground = true;
         blurEffect.blur.enabled = false;
-        LevelManager.instance.posionedMushroomDeadUI.SetActive(true);
         SoundManager.instance.stopSingle("dizzyBlurSound", dizzyBlurSound);
     }
 

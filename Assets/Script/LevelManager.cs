@@ -7,6 +7,8 @@ public class LevelManager : MonoBehaviour {
     public bool clearBackground = false;
     public bool madeFire = false;
     public bool drinkWater = false;
+    public bool unboiledWater = false;
+    public bool eatPosionedMushroom = false;
     public GameObject backgroundObjects;
     public GameObject posionedMushroomDeadUI;
     public GameObject noWaterDeadUI;
