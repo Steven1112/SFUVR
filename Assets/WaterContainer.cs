@@ -43,7 +43,6 @@ public class WaterContainer: MonoBehaviour {
 		//When don't hold the cup in right rotation
 		//Debug.Log(Quaternion.Angle(Quaternion.identity,transform.rotation));
 
-
 		if(Quaternion.Angle(Quaternion.identity,transform.rotation)>=degreeToPoolWater){
 			//Debug.Log ("EmptyCup");
 			if (waterInCup.localScale.y>emptyCupScale) {
@@ -55,28 +54,13 @@ public class WaterContainer: MonoBehaviour {
 			}
 			t = 0;
 		}
-
     }
 
     public void OnTriggerEnter(Collider col)
     {
         if (string.Equals(col.gameObject.tag, "Player"))
         {
-            Debug.Log("Drink water");
-            if (LevelManager.instance.drinkWater == true && LevelManager.instance.unboiledWater == true)
-            {
-                //Timer.instance.displaySeconds = Timer.instance.displaySeconds - Timer.instance.unBoiledWaterPunishSeconds;
-                Timer.instance.displayMinutes -= 1;
-                Debug.Log("Punished seconds for drinking unboiled water");
-                blurEffect.blur.enabled = true;
-                SoundManager.instance.playSingle("dizzyBlurSound", dizzyBlurSound);
-                StartCoroutine(WaitToBlurRemove());
-            }
 
-            if (LevelManager.instance.drinkWater == true && LevelManager.instance.unboiledWater == false)
-            {
-                // drink boiled water
-            }
         }
 
     }
@@ -101,6 +85,22 @@ public class WaterContainer: MonoBehaviour {
 				EmptyCup ();
 				waterInCup.gameObject.SetActive (false);
                 LevelManager.instance.drinkWater = true;
+
+                if (LevelManager.instance.drinkWater == true && LevelManager.instance.unboiledWater == true)
+                {
+                    Timer.instance.countDownSeconds = Timer.instance.countDownSeconds - Timer.instance.unBoiledWaterPunishSeconds;
+                    Debug.Log("Punished seconds for drinking unboiled water");
+                    blurEffect.blur.enabled = true;
+                    SoundManager.instance.playSingle("dizzyBlurSound", dizzyBlurSound);
+                    LevelManager.instance.drinkWater = false;
+                    LevelManager.instance.unboiledWater = false;
+                    StartCoroutine(WaitToBlurRemove());
+                }
+
+                if (LevelManager.instance.drinkWater == true && LevelManager.instance.unboiledWater == false)
+                {
+                    // drink boiled water
+                }
 
             }
 			t = 0;

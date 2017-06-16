@@ -51,8 +51,7 @@ public class MushroomSelection : MonoBehaviour
 
             LevelManager.instance.eatPosionedMushroom = true;
 
-            //Timer.instance.displaySeconds = Timer.instance.displaySeconds - Timer.instance.posionedMushroomPunishSeconds;
-            Timer.instance.displayMinutes -= 1;
+            Timer.instance.countDownSeconds = Timer.instance.countDownSeconds - Timer.instance.posionedMushroomPunishSeconds;
             Debug.Log("Punished seconds for eating posioned mushroom");
 
             StartCoroutine(WaitToBlurRemove());

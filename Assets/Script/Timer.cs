@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour
     private float startTime;
     [HideInInspector]
     public int restSeconds;
-    private int roundedRestSeconds;
+    public int roundedRestSeconds;
     public int displaySeconds;
     public int displayMinutes;
     private string text;
@@ -48,7 +48,6 @@ public class Timer : MonoBehaviour
         guiTime = Time.time - startTime;
 
         restSeconds = (int)(countDownSeconds - (guiTime));
-
 
         //display the timer
         roundedRestSeconds = Mathf.CeilToInt(restSeconds);
