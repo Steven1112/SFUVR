@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour {
     public bool drinkWater = false;
     public bool unboiledWater = false;
     public bool eatPosionedMushroom = false;
+    public bool eatGoodMushroom = false;
     public GameObject backgroundObjects;
     public GameObject posionedMushroomDeadUI;
     public GameObject noWaterDeadUI;
@@ -40,5 +41,10 @@ public class LevelManager : MonoBehaviour {
             backgroundObjects.SetActive(false);
         }
 
+        if (drinkWater == true && madeFire == true && eatGoodMushroom == true)
+        {
+            // get rescue
+            Debug.Log("Good Ending!");
+        }
 	}
 }

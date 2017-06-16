@@ -23,6 +23,9 @@ public class Timer : MonoBehaviour
     public int unBoiledWaterPunishSeconds;
     public static Timer instance = null;
 
+    public AudioClip twoMinuteSoundRemind;
+    public AudioClip oneMinuteSoundRemind;
+
     void Start()
     {
         if (instance == null)
@@ -63,12 +66,14 @@ public class Timer : MonoBehaviour
             {
                 //trigger almost die voice over hint
                 Debug.Log("One minute left!");
+                SoundManager.instance.playSingle("oneMinuteSoundRemind", oneMinuteSoundRemind);
             }
 
             if (displayMinutes <= 2 && displaySeconds < 1 && displayMinutes > 1)
             {
                 //trigger voice over hint
                 Debug.Log("Two minute left!");
+                SoundManager.instance.playSingle("twoMinuteSoundRemind", twoMinuteSoundRemind);
             }
         }
 

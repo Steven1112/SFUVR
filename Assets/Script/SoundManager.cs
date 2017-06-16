@@ -10,6 +10,8 @@ public class SoundManager : MonoBehaviour
     [Header("Sound Effects")]
     public AudioSource eatMushroomSound;
     public AudioSource dizzyBlurSound;
+    public AudioSource twoMinuteSoundRemind;
+    public AudioSource oneMinuteSoundRemind;
 
     // Use this for initialization
     void Start()
@@ -60,7 +62,6 @@ public class SoundManager : MonoBehaviour
             eatMushroomSound.Stop();
             eatMushroomSound.loop = false;
             Debug.Log("is stopping" + sound.name);
-            dizzyBlurSound.volume = 1;
         }
 
         if (audioSource == "dizzyBlurSound")
@@ -68,7 +69,46 @@ public class SoundManager : MonoBehaviour
             dizzyBlurSound.clip = sound;
             dizzyBlurSound.Stop();
             Debug.Log("is stopping" + sound.name);
-            dizzyBlurSound.volume = 0.3f;
+        }
+    }
+
+    public void playVoiceOver(string audioSource, AudioClip sound)
+    {
+        if (audioSource == "twoMinuteSoundRemind")
+        {
+            twoMinuteSoundRemind.clip = sound;
+            twoMinuteSoundRemind.Play();
+            twoMinuteSoundRemind.loop = false;
+            twoMinuteSoundRemind.volume = 1;
+            Debug.Log("is playing" + sound.name);
+        }
+
+        if (audioSource == "oneMinuteSoundRemind")
+        {
+            oneMinuteSoundRemind.clip = sound;
+            oneMinuteSoundRemind.Play();
+            oneMinuteSoundRemind.loop = false;
+            oneMinuteSoundRemind.volume = 1;
+            Debug.Log("is playing" + sound.name);
+        }
+    }
+
+    public void stopVoiceOver(string audioSource, AudioClip sound)
+    {
+        if (audioSource == "twoMinuteSoundRemind")
+        {
+            twoMinuteSoundRemind.clip = sound;
+            twoMinuteSoundRemind.Stop();
+            twoMinuteSoundRemind.loop = false;
+            Debug.Log("is stopping" + sound.name);
+        }
+
+        if (audioSource == "oneMinuteSoundRemind")
+        {
+            oneMinuteSoundRemind.clip = sound;
+            oneMinuteSoundRemind.Stop();
+            oneMinuteSoundRemind.loop = false;
+            Debug.Log("is stopping" + sound.name);
         }
     }
 }

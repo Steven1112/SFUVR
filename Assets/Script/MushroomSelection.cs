@@ -28,6 +28,7 @@ public class MushroomSelection : MonoBehaviour
         {
             // trigger unicorn and dizzy effect
             // trigger sound
+            LevelManager.instance.eatGoodMushroom = true;
             SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
             col.gameObject.SetActive(false);
         }

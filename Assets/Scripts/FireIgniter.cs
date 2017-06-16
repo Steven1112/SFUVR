@@ -40,10 +40,11 @@ public class FireIgniter : MonoBehaviour {
 		}
 	}
 
-	private void IgniteFire()
+	public void IgniteFire()
 	{
 		fireLight.TurnOn (true);
 		audioSource.Play ();
+        LevelManager.instance.madeFire = true;
 	}
 
 }
