@@ -66,14 +66,14 @@ public class Timer : MonoBehaviour
             {
                 //trigger almost die voice over hint
                 Debug.Log("One minute left!");
-                SoundManager.instance.playSingle("oneMinuteSoundRemind", oneMinuteSoundRemind);
+                SoundManager.instance.playVoiceOver("oneMinuteSoundRemind", oneMinuteSoundRemind);
             }
 
             if (displayMinutes <= 2 && displaySeconds < 1 && displayMinutes > 1)
             {
                 //trigger voice over hint
                 Debug.Log("Two minute left!");
-                SoundManager.instance.playSingle("twoMinuteSoundRemind", twoMinuteSoundRemind);
+                SoundManager.instance.playVoiceOver("twoMinuteSoundRemind", twoMinuteSoundRemind);
             }
         }
 

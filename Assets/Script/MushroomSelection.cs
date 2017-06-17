@@ -13,7 +13,7 @@ public class MushroomSelection : MonoBehaviour
 
     public void Start()
     {
-        blurEffect.blur.enabled = false;
+        blurEffect.blur.enabled = true;
     }
 
     // Update is called once per frame

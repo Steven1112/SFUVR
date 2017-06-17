@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour {
 
         if (drinkWater == true && madeFire == true && eatGoodMushroom == true)
         {
-            // get rescue
+            // get rescue voice over
             Debug.Log("Good Ending!");
         }
 	}
