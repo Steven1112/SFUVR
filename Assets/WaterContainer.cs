@@ -105,6 +105,7 @@ public class WaterContainer: MonoBehaviour {
             }
 			t = 0;
 		} else if (coll.tag == "BoneFire") {
+			
             if (haveWater)
             {
                 WaterBoiling();
@@ -113,6 +114,16 @@ public class WaterContainer: MonoBehaviour {
 		}
 	}
 
+	void OnTriggerExit(Collider coll){
+		if (coll.tag == "BoneFire") {
+			if (waterSoundEffects [2].isPlaying) {
+				waterSoundEffects [2].Stop ();
+				waterSoundEffects[2].time = 4f;
+				waterSoundEffects [2].Play ();
+			} 
+		}
+
+	}
 	void OnCollisionEnter(Collision coll){
 		//Debug.Log (coll.gameObject.name);
 	}
@@ -131,7 +142,7 @@ public class WaterContainer: MonoBehaviour {
 
 	}
 	void WaterBoiling(){
-        Debug.Log("water");
+      
 		if (!waterSoundEffects [2].isPlaying) {
 			waterSoundEffects [2].Play();
 		} 
