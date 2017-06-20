@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour {
-
+public class LevelManager : MonoBehaviour
+{
     public bool clearBackground = false;
     public bool madeFire = false;
     public bool drinkWater = false;
@@ -16,10 +16,12 @@ public class LevelManager : MonoBehaviour {
     public GameObject drunkInPoolDeadUI;
     public GameObject rescueUI;
 
+    public AudioClip rescueVoice;
+
     public static LevelManager instance = null;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         // create instance
         if (instance == null)
@@ -30,13 +32,12 @@ public class LevelManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-
     }
 
     // Update is called once per frame
-    void Update () {
-		
-        if(clearBackground == true)
+    private void Update()
+    {
+        if (clearBackground == true)
         {
             backgroundObjects.SetActive(false);
         }
@@ -44,7 +45,8 @@ public class LevelManager : MonoBehaviour {
         if (drinkWater == true && madeFire == true && eatGoodMushroom == true)
         {
             // get rescue voice over
+            SoundManager.instance.playVoiceOver("rescueVoice;", rescueVoice);
             Debug.Log("Good Ending!");
         }
-	}
+    }
 }

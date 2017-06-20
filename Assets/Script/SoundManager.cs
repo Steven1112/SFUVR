@@ -12,6 +12,9 @@ public class SoundManager : MonoBehaviour
     public AudioSource dizzyBlurSound;
     public AudioSource twoMinuteSoundRemind;
     public AudioSource oneMinuteSoundRemind;
+	public AudioSource rescueVoice;
+	public AudioSource posionedMushroomVoice;
+	public AudioSource dehydratedVoice;
 
     // Use this for initialization
     void Start()
@@ -91,6 +94,33 @@ public class SoundManager : MonoBehaviour
             oneMinuteSoundRemind.volume = 1;
             Debug.Log("is playing" + sound.name);
         }
+
+		if (audioSource == "rescueVoice")
+		{
+			rescueVoice.clip = sound;
+			rescueVoice.Play();
+			rescueVoice.loop = false;
+			rescueVoice.volume = 1;
+			Debug.Log("is playing" + sound.name);
+		}
+
+		if (audioSource == "posionedMushroomVoice")
+		{
+			posionedMushroomVoice.clip = sound;
+			posionedMushroomVoice.Play();
+			posionedMushroomVoice.loop = false;
+			posionedMushroomVoice.volume = 1;
+			Debug.Log("is playing" + sound.name);
+		}
+
+		if (audioSource == "dehydratedVoice")
+		{
+			dehydratedVoice.clip = sound;
+			dehydratedVoice.Play();
+			dehydratedVoice.loop = false;
+			dehydratedVoice.volume = 1;
+			Debug.Log("is playing" + sound.name);
+		}
     }
 
     public void stopVoiceOver(string audioSource, AudioClip sound)
@@ -110,5 +140,32 @@ public class SoundManager : MonoBehaviour
             oneMinuteSoundRemind.loop = false;
             Debug.Log("is stopping" + sound.name);
         }
+
+		if (audioSource == "rescueVoice")
+		{
+			rescueVoice.clip = sound;
+			rescueVoice.Stop();
+			rescueVoice.loop = false;
+			rescueVoice.volume = 1;
+			Debug.Log("is playing" + sound.name);
+		}
+
+		if (audioSource == "posionedMushroomVoice")
+		{
+			posionedMushroomVoice.clip = sound;
+			posionedMushroomVoice.Stop();
+			posionedMushroomVoice.loop = false;
+			posionedMushroomVoice.volume = 1;
+			Debug.Log("is playing" + sound.name);
+		}
+
+		if (audioSource == "dehydratedVoice")
+		{
+			dehydratedVoice.clip = sound;
+			dehydratedVoice.Stop();
+			dehydratedVoice.loop = false;
+			dehydratedVoice.volume = 1;
+			Debug.Log("is playing" + sound.name);
+		}
     }
 }

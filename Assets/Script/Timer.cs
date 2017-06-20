@@ -25,6 +25,7 @@ public class Timer : MonoBehaviour
 
     public AudioClip twoMinuteSoundRemind;
     public AudioClip oneMinuteSoundRemind;
+	public AudioClip dehydratedVoice;
 
     void Start()
     {
@@ -61,6 +62,13 @@ public class Timer : MonoBehaviour
         if (displaySeconds >= 0 || displayMinutes > 0)
         {
             text = string.Format("{0:00}:{1:00}", displayMinutes, displaySeconds);
+
+			if (displayMinutes < 4 && displaySeconds < 60)
+			{
+				//trigger voice over
+				Debug.Log("Cold to die!");
+				SoundManager.instance.playVoiceOver("dehydratedVoice", dehydratedVoice);
+			}
 
             if (displayMinutes <= 1 && displaySeconds < 1)
             {

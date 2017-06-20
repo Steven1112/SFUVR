@@ -10,6 +10,7 @@ public class MushroomSelection : MonoBehaviour
     public int blurTime;
     public AudioClip eatMushroomSound;
     public AudioClip dizzyBlurSound;
+	public AudioClip posionedMushroomVoice;
 
     public void Start()
     {
@@ -30,6 +31,7 @@ public class MushroomSelection : MonoBehaviour
             // trigger sound
             LevelManager.instance.eatGoodMushroom = true;
             SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
+			SoundManager.instance.playVoiceOver("posionedMushroomVoice", posionedMushroomVoice);
             col.gameObject.SetActive(false);
         }
 
@@ -76,7 +78,9 @@ public class MushroomSelection : MonoBehaviour
         if (string.Equals(col.gameObject.tag, "goodmushroom"))
         {
             // trigger sound
-            SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
+			LevelManager.instance.eatGoodMushroom = true;
+			SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
+			SoundManager.instance.playVoiceOver("posionedMushroomVoice", posionedMushroomVoice);
             col.gameObject.SetActive(false);
         }
 
