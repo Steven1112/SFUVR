@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     public GameObject noWaterDeadUI;
     public GameObject drunkInPoolDeadUI;
     public GameObject rescueUI;
+    public GameObject dieEndUI;
 
     public AudioClip rescueVoice;
 
@@ -46,6 +47,8 @@ public class LevelManager : MonoBehaviour
         {
             // get rescue voice over
             SoundManager.instance.playVoiceOver("rescueVoice;", rescueVoice);
+            clearBackground = true;
+            rescueUI.SetActive(true);
             Debug.Log("Good Ending!");
         }
     }

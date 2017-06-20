@@ -5,8 +5,10 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     private float startTime;
+
     [HideInInspector]
     public int restSeconds;
+
     public int roundedRestSeconds;
     public int displaySeconds;
     public int displayMinutes;
@@ -25,9 +27,10 @@ public class Timer : MonoBehaviour
 
     public AudioClip twoMinuteSoundRemind;
     public AudioClip oneMinuteSoundRemind;
-	public AudioClip dehydratedVoice;
+    public AudioClip dehydratedVoice;
+    public AudioClip deathVoiceClip;
 
-    void Start()
+    private void Start()
     {
         if (instance == null)
         {
@@ -41,13 +44,12 @@ public class Timer : MonoBehaviour
         GameObject controlPanel = GameObject.Find("Timer");
     }
 
-    void Awake()
+    private void Awake()
     {
-
         startTime = Time.time;
     }
 
-    void Update()
+    private void Update()
     {
         guiTime = Time.time - startTime;
 
@@ -63,18 +65,11 @@ public class Timer : MonoBehaviour
         {
             text = string.Format("{0:00}:{1:00}", displayMinutes, displaySeconds);
 
-			if (displayMinutes < 4 && displaySeconds < 60)
-			{
-				//trigger voice over
-				Debug.Log("Cold to die!");
-				SoundManager.instance.playVoiceOver("dehydratedVoice", dehydratedVoice);
-			}
-
-            if (displayMinutes <= 1 && displaySeconds < 1)
+            if (displayMinutes < 4 && displaySeconds < 60)
             {
-                //trigger almost die voice over hint
-                Debug.Log("One minute left!");
-                SoundManager.instance.playVoiceOver("oneMinuteSoundRemind", oneMinuteSoundRemind);
+                //trigger voice over
+                Debug.Log("Wondering too cold!");
+                SoundManager.instance.playVoiceOver("dehydratedVoice", dehydratedVoice);
             }
 
             if (displayMinutes <= 2 && displaySeconds < 1 && displayMinutes > 1)
@@ -83,6 +78,13 @@ public class Timer : MonoBehaviour
                 Debug.Log("Two minute left!");
                 SoundManager.instance.playVoiceOver("twoMinuteSoundRemind", twoMinuteSoundRemind);
             }
+
+            if (displayMinutes <= 1 && displaySeconds < 1)
+            {
+                //trigger almost die voice over hint
+                Debug.Log("One minute left!");
+                SoundManager.instance.playVoiceOver("oneMinuteSoundRemind", oneMinuteSoundRemind);
+            }
         }
 
         if (displaySeconds < 0)
@@ -90,10 +92,14 @@ public class Timer : MonoBehaviour
             displaySeconds = 0;
             text = string.Format("{0:00}:{1:00}", 0, 0);
             Debug.Log("Timers up, You die!");
+            LevelManager.instance.dieEndUI.SetActive(true);
+            LevelManager.instance.clearBackground = true;
+            // death by cold sound
+            SoundManager.instance.playVoiceOver("deathVoiceClip", deathVoiceClip);
         }
 
         // always do wrond actions will immediately die
-        if(LevelManager.instance.unboiledWater == true && LevelManager.instance.eatPosionedMushroom == true)
+        if (LevelManager.instance.unboiledWater == true && LevelManager.instance.eatPosionedMushroom == true)
         {
             displaySeconds = 0;
             displayMinutes = 0;
