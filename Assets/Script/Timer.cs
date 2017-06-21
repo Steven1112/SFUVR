@@ -30,6 +30,11 @@ public class Timer : MonoBehaviour
     public AudioClip dehydratedVoice;
     public AudioClip deathVoiceClip;
 
+    private bool loadSound;
+    private bool loadSound2;
+    private bool loadSound3;
+    private bool loadSound4;
+
     private void Start()
     {
         if (instance == null)
@@ -65,29 +70,32 @@ public class Timer : MonoBehaviour
         {
             text = string.Format("{0:00}:{1:00}", displayMinutes, displaySeconds);
 
-            if (displayMinutes < 4 && displaySeconds < 60)
+            if (displayMinutes < 4 && displaySeconds < 60 && loadSound == false)
             {
                 //trigger voice over
                 Debug.Log("Wondering too cold!");
                 SoundManager.instance.playVoiceOver("dehydratedVoice", dehydratedVoice);
+                loadSound = true;
             }
 
-            if (displayMinutes <= 2 && displaySeconds < 1 && displayMinutes > 1)
+            if (displayMinutes <= 2 && displaySeconds < 1 && displayMinutes > 1 && loadSound2 == false)
             {
                 //trigger voice over hint
                 Debug.Log("Two minute left!");
                 SoundManager.instance.playVoiceOver("twoMinuteSoundRemind", twoMinuteSoundRemind);
+                loadSound2 = true;
             }
 
-            if (displayMinutes <= 1 && displaySeconds < 1)
+            if (displayMinutes <= 1 && displaySeconds < 1 && loadSound3 == false)
             {
                 //trigger almost die voice over hint
                 Debug.Log("One minute left!");
                 SoundManager.instance.playVoiceOver("oneMinuteSoundRemind", oneMinuteSoundRemind);
+                loadSound3 = true;
             }
         }
 
-        if (displaySeconds < 0)
+        if (displaySeconds < 0 && loadSound4 == false)
         {
             displaySeconds = 0;
             text = string.Format("{0:00}:{1:00}", 0, 0);
@@ -96,6 +104,8 @@ public class Timer : MonoBehaviour
             LevelManager.instance.clearBackground = true;
             // death by cold sound
             SoundManager.instance.playVoiceOver("deathVoiceClip", deathVoiceClip);
+            MushroomSelection.instance.blurEffect.enabled = false;
+            loadSound4 = true;
         }
 
         // always do wrond actions will immediately die
@@ -105,20 +115,4 @@ public class Timer : MonoBehaviour
             displayMinutes = 0;
         }
     }
-
-    /*
-    void OnGUI()
-    {
-        GUI.skin.box.fontStyle = FontStyle.Bold;
-        GUI.skin.box.fontSize = 100;
-        GUI.skin.box.alignment = TextAnchor.MiddleCenter;
-        GUI.skin.font = font;
-        GUI.skin.button.fontStyle = FontStyle.Bold;
-        GUI.skin.button.fontSize = 100;
-        GUI.skin.button.alignment = TextAnchor.MiddleCenter;
-        GUI.skin.box.normal.background = (Texture2D)timerImage;
-
-        GUI.Box(new Rect(Screen.width / 2 - 200, 0, 400, 200), text);
-    }
-    */
 }

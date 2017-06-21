@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public GameObject drunkInPoolDeadUI;
     public GameObject rescueUI;
     public GameObject dieEndUI;
+    private bool loadSound;
 
     public AudioClip rescueVoice;
 
@@ -43,13 +44,15 @@ public class LevelManager : MonoBehaviour
             backgroundObjects.SetActive(false);
         }
 
-        if (drinkWater == true && madeFire == true && eatGoodMushroom == true)
+        if (drinkWater == true && madeFire == true && eatGoodMushroom == true && loadSound == false)
         {
             // get rescue voice over
             SoundManager.instance.playVoiceOver("rescueVoice;", rescueVoice);
             clearBackground = true;
             rescueUI.SetActive(true);
             Debug.Log("Good Ending!");
+            MushroomSelection.instance.blurEffect.enabled = false;
+            loadSound = true;
         }
     }
 }

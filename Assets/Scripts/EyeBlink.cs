@@ -3,50 +3,69 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.ImageEffects;
 
-public class EyeBlink : MonoBehaviour {
+public class EyeBlink : MonoBehaviour
+{
+    private Animator anim;
 
-	private Animator anim; 
-	[SerializeField]
-	private bool blink;
     [SerializeField]
-    private float delay;
+    private bool blink;
+
+    [SerializeField]
+    private float blinkDelay;
+
+    [SerializeField]
+    private float blurDelay;
+
     public BlurOptimized blurEffect;
 
     // Use this for initialization
-    void Start () {
-		anim = GetComponent<Animator> ();
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
         blink = true;
-        StartCoroutine(StopBlinkAndBlurInDelay(delay));
+        StartCoroutine(StopBlinkAndBlurInDelay(blinkDelay));
+        StartCoroutine(StopBlurInDelay(blurDelay));
     }
 
     // Update is called once per frame
-    void Update () {
-		if (blink) {
-			StartCoroutine (BlinkDelayInCertainSpeed (1, 0.5f));
-		} else {
-			StopCoroutine ("BlinkDelayInCertainSpeed");
-		}
-	}
+    private void Update()
+    {
+        if (blink)
+        {
+            StartCoroutine(BlinkDelayInCertainSpeed(3f, 1f));
+        }
+        else {
+            StopCoroutine("BlinkDelayInCertainSpeed");
+        }
+    }
 
-
-	public IEnumerator BlinkDelayInCertainSpeed(int time, float speed){
+    public IEnumerator BlinkDelayInCertainSpeed(float time, float speed)
+    {
         anim.SetTrigger("EyeBlink");
-        yield return new WaitForSeconds (time);
-		anim.speed = speed;
-		anim.SetTrigger ("EyeBlink");
+        yield return new WaitForSeconds(time);
+        anim.speed = speed;
+        anim.SetTrigger("EyeBlink");
+    }
 
-	}
+    public void GoBlink()
+    {
+        blink = true;
+    }
 
-	public void GoBlink(){
-		blink = true;
-	}
-	public void DonotBlink(){
-		blink = false;
-	}
+    public void DonotBlink()
+    {
+        blink = false;
+    }
+
     public IEnumerator StopBlinkAndBlurInDelay(float times)
     {
         yield return new WaitForSeconds(times);
         blink = false;
+    }
+
+    public IEnumerator StopBlurInDelay(float times)
+    {
+        yield return new WaitForSeconds(times);
         blurEffect.blur.enabled = false;
     }
 }

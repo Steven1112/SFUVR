@@ -23,7 +23,6 @@ public class FireIgniter : MonoBehaviour
             {
                 cc.IsInsideArea = true;
                 cc.OnReachCountTarget += IgniteFire;
-                // audioSource.Play();
             }
         }
     }
@@ -38,7 +37,6 @@ public class FireIgniter : MonoBehaviour
                 cc.IsInsideArea = false;
                 cc.ResetCounter();
                 cc.OnReachCountTarget -= IgniteFire;
-                audioSource.Stop();
             }
         }
     }
@@ -47,5 +45,6 @@ public class FireIgniter : MonoBehaviour
     {
         fireLight.TurnOn(true);
         LevelManager.instance.madeFire = true;
+        audioSource.Play();
     }
 }
