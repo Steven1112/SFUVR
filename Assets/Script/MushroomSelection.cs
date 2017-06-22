@@ -10,11 +10,22 @@ public class MushroomSelection : MonoBehaviour
     public int blurTime;
     public AudioClip eatMushroomSound;
     public AudioClip dizzyBlurSound;
-	public AudioClip posionedMushroomVoice;
+    public AudioClip posionedMushroomVoice;
+
+    public static MushroomSelection instance = null;
 
     public void Start()
     {
         blurEffect.blur.enabled = true;
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -31,7 +42,6 @@ public class MushroomSelection : MonoBehaviour
             // trigger sound
             LevelManager.instance.eatGoodMushroom = true;
             SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
-			SoundManager.instance.playVoiceOver("posionedMushroomVoice", posionedMushroomVoice);
             col.gameObject.SetActive(false);
         }
 
@@ -51,6 +61,7 @@ public class MushroomSelection : MonoBehaviour
             col.gameObject.SetActive(false);
             blurEffect.blur.enabled = true;
             SoundManager.instance.playSingle("dizzyBlurSound", dizzyBlurSound);
+            SoundManager.instance.playVoiceOver("posionedMushroomVoice", posionedMushroomVoice);
 
             LevelManager.instance.eatPosionedMushroom = true;
 
@@ -59,7 +70,6 @@ public class MushroomSelection : MonoBehaviour
 
             StartCoroutine(WaitToBlurRemove());
         }
-
 
         /*
         if (string.Equals(col.gameObject.tag, "poolArea"))
@@ -78,9 +88,8 @@ public class MushroomSelection : MonoBehaviour
         if (string.Equals(col.gameObject.tag, "goodmushroom"))
         {
             // trigger sound
-			LevelManager.instance.eatGoodMushroom = true;
-			SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
-			SoundManager.instance.playVoiceOver("posionedMushroomVoice", posionedMushroomVoice);
+            LevelManager.instance.eatGoodMushroom = true;
+            SoundManager.instance.playSingle("eatMushroomSound", eatMushroomSound);
             col.gameObject.SetActive(false);
         }
 
@@ -100,6 +109,7 @@ public class MushroomSelection : MonoBehaviour
             col.gameObject.SetActive(false);
             blurEffect.blur.enabled = true;
             SoundManager.instance.playSingle("dizzyBlurSound", dizzyBlurSound);
+            SoundManager.instance.playVoiceOver("posionedMushroomVoice", posionedMushroomVoice);
 
             LevelManager.instance.eatPosionedMushroom = true;
 
@@ -120,7 +130,7 @@ public class MushroomSelection : MonoBehaviour
     }
 
     // ate posioned mushroom getting blur for seconds to dead end
-    IEnumerator WaitToBlurRemove()
+    private IEnumerator WaitToBlurRemove()
     {
         yield return new WaitForSeconds(blurTime);
         blurEffect.blur.enabled = false;
