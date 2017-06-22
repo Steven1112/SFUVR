@@ -70,7 +70,7 @@ public class Timer : MonoBehaviour
         {
             text = string.Format("{0:00}:{1:00}", displayMinutes, displaySeconds);
 
-            if (displayMinutes < 4 && displaySeconds < 60 && loadSound == false)
+            if (displayMinutes < 3 && displaySeconds < 60 && loadSound == false)
             {
                 //trigger voice over
                 Debug.Log("Wondering too cold!");

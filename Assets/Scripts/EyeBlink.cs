@@ -16,6 +16,8 @@ public class EyeBlink : MonoBehaviour
     [SerializeField]
     private float blurDelay;
 
+    public GameObject up;
+    public GameObject down;
     public BlurOptimized blurEffect;
 
     // Use this for initialization
@@ -61,6 +63,8 @@ public class EyeBlink : MonoBehaviour
     {
         yield return new WaitForSeconds(times);
         blink = false;
+        up.SetActive(false);
+        down.SetActive(false);
     }
 
     public IEnumerator StopBlurInDelay(float times)
